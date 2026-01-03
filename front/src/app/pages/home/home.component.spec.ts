@@ -3,6 +3,8 @@ import { provideNoopAnimations } from '@angular/platform-browser/animations';
 
 import { HomeComponent } from './home.component';
 
+import {describe, beforeEach, it, expect} from 'vitest';
+
 describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
