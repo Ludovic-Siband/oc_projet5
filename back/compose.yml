@@ -1,0 +1,21 @@
+name: mdd
+
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: mdd-mysql
+    ports:
+      - "3306:3306"
+    env_file:
+      - .env
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: change_me_root
+    volumes:
+      - mdd_db_data:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/00_init.sql:ro
+
+volumes:
+  mdd_db_data:

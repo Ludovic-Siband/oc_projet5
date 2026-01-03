@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: mdd-api
+  docker:
+    compose:
+      file: compose.yml
