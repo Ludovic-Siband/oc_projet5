@@ -1,6 +1,10 @@
 spring:
   application:
     name: mdd-api
+  jpa:
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
   docker:
     compose:
       file: compose.yml
