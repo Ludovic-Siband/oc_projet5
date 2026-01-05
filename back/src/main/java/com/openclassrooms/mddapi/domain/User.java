@@ -12,7 +12,9 @@ import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Entity
@@ -20,6 +22,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@RequiredArgsConstructor
 public class User {
 
 	@Id
@@ -28,12 +31,15 @@ public class User {
 	private Long id;
 
 	@Column(name = "email", nullable = false, unique = true, length = 255)
+	@NonNull
 	private String email;
 
 	@Column(name = "username", nullable = false, unique = true, length = 50)
+	@NonNull
 	private String username;
 
 	@Column(name = "password", nullable = false, length = 255)
+	@NonNull
 	private String password;
 
 	@Column(name = "created_at", nullable = false)
