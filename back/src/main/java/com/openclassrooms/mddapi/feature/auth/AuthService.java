@@ -1,4 +1,4 @@
-package com.openclassrooms.mddapi.auth;
+package com.openclassrooms.mddapi.feature.auth;
 
 import java.time.Instant;
 
@@ -6,16 +6,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.openclassrooms.mddapi.auth.dto.LoginRequest;
-import com.openclassrooms.mddapi.auth.dto.LoginResponse;
-import com.openclassrooms.mddapi.auth.dto.RefreshResponse;
-import com.openclassrooms.mddapi.auth.dto.RegisterRequest;
-import com.openclassrooms.mddapi.auth.dto.RegisterResponse;
-import com.openclassrooms.mddapi.auth.dto.UserDto;
+import com.openclassrooms.mddapi.feature.auth.dto.LoginRequest;
+import com.openclassrooms.mddapi.feature.auth.dto.LoginResponse;
+import com.openclassrooms.mddapi.feature.auth.dto.RefreshResponse;
+import com.openclassrooms.mddapi.feature.auth.dto.RegisterRequest;
+import com.openclassrooms.mddapi.feature.auth.dto.RegisterResponse;
+import com.openclassrooms.mddapi.feature.auth.dto.UserDto;
 import com.openclassrooms.mddapi.domain.AuthSession;
 import com.openclassrooms.mddapi.domain.User;
-import com.openclassrooms.mddapi.error.ConflictException;
-import com.openclassrooms.mddapi.error.UnauthorizedException;
+import com.openclassrooms.mddapi.exception.ConflictException;
+import com.openclassrooms.mddapi.exception.UnauthorizedException;
 import com.openclassrooms.mddapi.repository.AuthSessionRepository;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import com.openclassrooms.mddapi.security.JwtService;

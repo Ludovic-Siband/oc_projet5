@@ -1,4 +1,4 @@
-package com.openclassrooms.mddapi.error;
+package com.openclassrooms.mddapi.exception;
 
 public class ConflictException extends RuntimeException {
 	public ConflictException(String message) {

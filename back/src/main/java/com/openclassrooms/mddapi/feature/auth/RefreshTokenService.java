@@ -1,4 +1,4 @@
-package com.openclassrooms.mddapi.auth;
+package com.openclassrooms.mddapi.feature.auth;
 
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;

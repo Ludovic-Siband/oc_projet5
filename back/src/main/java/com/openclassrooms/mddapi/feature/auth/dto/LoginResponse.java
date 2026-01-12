@@ -1,4 +1,4 @@
-package com.openclassrooms.mddapi.auth.dto;
+package com.openclassrooms.mddapi.feature.auth.dto;
 
 public record LoginResponse(
 		String accessToken,

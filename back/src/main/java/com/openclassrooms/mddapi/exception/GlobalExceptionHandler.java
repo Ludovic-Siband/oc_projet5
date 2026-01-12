@@ -1,4 +1,4 @@
-package com.openclassrooms.mddapi.error;
+package com.openclassrooms.mddapi.exception;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -33,10 +33,14 @@ public class GlobalExceptionHandler {
 		return ResponseEntity.status(HttpStatus.CONFLICT).body(ApiError.simple("CONFLICT", ex.getMessage()));
 	}
 
+	@ExceptionHandler(NotFoundException.class)
+	public ResponseEntity<ApiError> handleNotFound(NotFoundException ex) {
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ApiError.simple("NOT_FOUND", ex.getMessage()));
+	}
+
 	@ExceptionHandler(DataIntegrityViolationException.class)
 	public ResponseEntity<ApiError> handleIntegrity(DataIntegrityViolationException ex) {
 		return ResponseEntity.status(HttpStatus.CONFLICT)
 				.body(ApiError.simple("CONFLICT", "Ressource déjà existante"));
 	}
 }
-

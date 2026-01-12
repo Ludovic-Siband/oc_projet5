@@ -1,4 +1,4 @@
-package com.openclassrooms.mddapi.auth;
+package com.openclassrooms.mddapi.feature.auth;
 
 import java.util.Arrays;
 
@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.openclassrooms.mddapi.auth.dto.LoginRequest;
-import com.openclassrooms.mddapi.auth.dto.LoginResponse;
-import com.openclassrooms.mddapi.auth.dto.MessageResponse;
-import com.openclassrooms.mddapi.auth.dto.RefreshResponse;
-import com.openclassrooms.mddapi.auth.dto.RegisterRequest;
-import com.openclassrooms.mddapi.auth.dto.RegisterResponse;
+import com.openclassrooms.mddapi.feature.auth.dto.LoginRequest;
+import com.openclassrooms.mddapi.feature.auth.dto.LoginResponse;
+import com.openclassrooms.mddapi.feature.auth.dto.MessageResponse;
+import com.openclassrooms.mddapi.feature.auth.dto.RefreshResponse;
+import com.openclassrooms.mddapi.feature.auth.dto.RegisterRequest;
+import com.openclassrooms.mddapi.feature.auth.dto.RegisterResponse;
 import com.openclassrooms.mddapi.config.AuthProperties;
 
 import jakarta.servlet.http.Cookie;
