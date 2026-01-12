@@ -11,7 +11,7 @@ spring:
 
 app:
   auth:
-    jwt-secret: ${JWT_SECRET:change_me_dev_secret_change_me_dev_secret_32b}
+    jwt-secret: ${JWT_SECRET}
     access-token-ttl-seconds: 900
     refresh-token-ttl-days: 30
     refresh-cookie-name: refreshToken
