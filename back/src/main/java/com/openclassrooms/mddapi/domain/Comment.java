@@ -52,4 +52,10 @@ public class Comment {
 			createdAt = Instant.now();
 		}
 	}
+
+	public Comment(Post post, User author, String content) {
+		this.post = post;
+		this.author = author;
+		this.content = content;
+	}
 }

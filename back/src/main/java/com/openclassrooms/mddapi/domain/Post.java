@@ -55,4 +55,11 @@ public class Post {
 			createdAt = Instant.now();
 		}
 	}
+
+	public Post(Subject subject, User author, String title, String content) {
+		this.subject = subject;
+		this.author = author;
+		this.title = title;
+		this.content = content;
+	}
 }
