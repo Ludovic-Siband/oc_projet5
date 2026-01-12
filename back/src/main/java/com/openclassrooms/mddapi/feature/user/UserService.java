@@ -3,7 +3,6 @@ package com.openclassrooms.mddapi.feature.user;
 import java.util.List;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,7 +11,6 @@ import com.openclassrooms.mddapi.domain.Subscription;
 import com.openclassrooms.mddapi.domain.User;
 import com.openclassrooms.mddapi.exception.ConflictException;
 import com.openclassrooms.mddapi.exception.NotFoundException;
-import com.openclassrooms.mddapi.exception.UnauthorizedException;
 import com.openclassrooms.mddapi.repository.SubscriptionRepository;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import com.openclassrooms.mddapi.feature.user.dto.SubscriptionDto;
@@ -30,8 +28,7 @@ public class UserService {
 	private final PasswordEncoder passwordEncoder;
 
 	@Transactional(readOnly = true)
-	public UserProfileResponse getProfile(Jwt jwt) {
-		long userId = extractUserId(jwt);
+	public UserProfileResponse getProfile(long userId) {
 		User user = userRepository.findById(userId)
 				.orElseThrow(() -> new NotFoundException("Utilisateur introuvable"));
 
@@ -46,20 +43,8 @@ public class UserService {
 		return new UserProfileResponse(user.getId(), user.getEmail(), user.getUsername(), subscriptionDtos);
 	}
 
-	private long extractUserId(Jwt jwt) {
-		if (jwt == null || jwt.getSubject() == null || jwt.getSubject().isBlank()) {
-			throw new UnauthorizedException("Utilisateur non authentifié");
-		}
-		try {
-			return Long.parseLong(jwt.getSubject());
-		} catch (NumberFormatException ex) {
-			throw new UnauthorizedException("Utilisateur non authentifié");
-		}
-	}
-
 	@Transactional
-	public UserDto updateProfile(Jwt jwt, UpdateUserRequest request) {
-		long userId = extractUserId(jwt);
+	public UserDto updateProfile(long userId, UpdateUserRequest request) {
 		User user = userRepository.findById(userId)
 				.orElseThrow(() -> new NotFoundException("Utilisateur introuvable"));
 

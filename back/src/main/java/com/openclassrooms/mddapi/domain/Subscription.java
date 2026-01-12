@@ -32,4 +32,9 @@ public class Subscription {
 	@MapsId("subjectId")
 	@JoinColumn(name = "subject_id", nullable = false)
 	private Subject subject;
+
+	public Subscription(User user, Subject subject) {
+		this.user = user;
+		this.subject = subject;
+	}
 }
