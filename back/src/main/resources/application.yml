@@ -13,7 +13,7 @@ app:
   auth:
     jwt-secret: ${JWT_SECRET}
     access-token-ttl-seconds: 900
-    refresh-token-ttl-days: 30
+    refresh-token-ttl-days: 1
     refresh-cookie-name: refreshToken
     cookie-secure: false
     cookie-same-site: Strict
