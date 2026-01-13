@@ -10,7 +10,7 @@
     </nav>
 
     <div class="app-nav__actions">
-      <button class="app-nav__logout" matButton (click)="logout()">Se déconnecter</button>
+      <button class="app-nav__logout" matButton color="warn" (click)="logout()">Se déconnecter</button>
       <a class="app-nav__avatar" mat-icon-button routerLink="/user">
         <mat-icon>person</mat-icon>
       </a>
@@ -29,7 +29,7 @@
       <mat-icon>close</mat-icon>
     </button>
     <nav class="app-nav__drawer-nav">
-      <button class="app-nav__drawer-logout" matButton type="button" (click)="logout()">Se déconnecter</button>
+      <button class="app-nav__drawer-logout" matButton color="warn" type="button" (click)="logout()">Se déconnecter</button>
       <a class="app-nav__drawer-link" routerLink="/feed" (click)="closeMenu()">Articles</a>
       <a class="app-nav__drawer-link" routerLink="/subjects" (click)="closeMenu()">Thèmes</a>
     </nav>
