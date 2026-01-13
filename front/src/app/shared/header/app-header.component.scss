@@ -18,6 +18,10 @@
   height: 3.5rem;
 }
 
+.app-nav__logo-link {
+  display: inline-flex;
+}
+
 .app-nav__links {
   display: none;
   gap: var(--space-4);
