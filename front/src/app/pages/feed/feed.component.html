@@ -22,12 +22,14 @@
     <section class="feed__grid">
       @for (post of posts(); track post.id) {
         <mat-card class="feed__card">
-          <h2 class="feed__title">{{ post.title }}</h2>
-          <div class="feed__meta">
-            <span>{{ post.createdAt | date: 'dd/MM/yyyy' }}</span>
-            <span>{{ post.author }}</span>
-          </div>
-          <p class="feed__content">{{ post.content }}</p>
+          <mat-card-action-area class="feed__card-action" routerLink="/feed/posts/{{ post.id }}">
+            <h2 class="feed__title">{{ post.title }}</h2>
+            <div class="feed__meta">
+              <span>{{ post.createdAt | date: 'dd/MM/yyyy' }}</span>
+              <span>{{ post.author }}</span>
+            </div>
+            <p class="feed__content">{{ post.content }}</p>
+          </mat-card-action-area>
         </mat-card>
       }
     </section>
