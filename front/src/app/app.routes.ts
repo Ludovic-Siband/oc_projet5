@@ -72,4 +72,16 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'subjects',
+    loadComponent: () =>
+      import('./layouts/app-layout/app-layout.component').then((module) => module.AppLayoutComponent),
+    canMatch: [authGuard],
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./pages/subjects/subjects.component').then((module) => module.SubjectsComponent),
+      },
+    ],
+  },
 ];
