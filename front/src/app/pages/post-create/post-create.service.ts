@@ -8,6 +8,7 @@ import { CreatePostError, CreatePostRequest, CreatePostResponse, SubjectOption }
 type SubjectResponse = {
   id: number;
   name: string;
+  subscribed: boolean;
 };
 
 @Injectable({ providedIn: 'root' })
@@ -16,7 +17,11 @@ export class PostCreateService {
 
   getSubjects(): Observable<SubjectOption[]> {
     return this.http.get<SubjectResponse[]>(`${environment.apiBaseUrl}/api/subjects`).pipe(
-      map((subjects) => subjects.map((subject) => ({ id: subject.id, name: subject.name }))),
+      map((subjects) =>
+        subjects
+          .filter((subject) => subject.subscribed)
+          .map((subject) => ({ id: subject.id, name: subject.name })),
+      ),
     );
   }
 
