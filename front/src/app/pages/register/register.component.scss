@@ -1,13 +1,16 @@
 @use 'layout' as layout;
 @use 'breakpoints' as bp;
 
-.register {
-  min-height: 100vh;
-  background: #fff;
+.register__inner {
+  max-width: var(--container-max);
+  margin-inline: auto;
+    min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  padding: var(--space-5) var(--gutter) var(--space-6);
 }
 
 .register__panel {
-  @include layout.container;
   display: flex;
   flex-direction: column;
   align-items: center;

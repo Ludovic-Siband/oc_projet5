@@ -1,8 +1,9 @@
-<main class="login">
-  <section class="login__panel">
-    <a class="login__back" matButton routerLink="/">⟵</a>
-    <img class="login__logo" src="assets/logo_p6.png" alt="Logo MDD" />
-    <h1 class="login__title">Se connecter</h1>
+<main class="container">
+  <div class="login__inner">
+    <section class="login__panel">
+      <a class="login__back" matButton routerLink="/">⟵</a>
+      <img class="login__logo" src="assets/logo_p6.png" alt="Logo MDD" />
+      <h1 class="login__title">Se connecter</h1>
 
     <form class="login__form" [formGroup]="form" (ngSubmit)="submit()">
       <mat-form-field appearance="outline" class="login__field">
@@ -37,5 +38,6 @@
         Se connecter
       </button>
     </form>
-  </section>
+    </section>
+  </div>
 </main>
