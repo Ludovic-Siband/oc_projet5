@@ -43,4 +43,16 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'user',
+    loadComponent: () =>
+      import('./layouts/app-layout/app-layout.component').then((module) => module.AppLayoutComponent),
+    canMatch: [authGuard],
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./pages/user/user.component').then((module) => module.UserComponent),
+      },
+    ],
+  },
 ];
