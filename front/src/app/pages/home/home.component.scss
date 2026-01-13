@@ -1,7 +1,46 @@
-.center {
-  height: 100vh;
+@use 'layout' as layout;
+@use 'breakpoints' as bp;
+
+.home {
+  min-height: 100vh;
   display: flex;
   justify-content: center;
+  align-items: flex-start;
+  background: #fff;
+}
+
+.home__content {
+  @include layout.container;
+  @include layout.stack(var(--space-5));
   align-items: center;
-  flex-direction: column;
+  text-align: center;
+  padding-top: clamp(48px, 12vh, 120px);
+}
+
+.home__logo {
+  width: clamp(200px, 55vw, 320px);
+  height: auto;
+}
+
+.home__actions {
+  @include layout.grid(1, var(--space-3));
+  width: 100%;
+  max-width: 420px;
+  justify-items: stretch;
+}
+
+.home__button {
+  width: 100%;
+}
+
+@include bp.up(md) {
+  .home__actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@include bp.down(sm) {
+  .home__logo {
+    width: clamp(220px, 70vw, 320px);
+  }
 }
