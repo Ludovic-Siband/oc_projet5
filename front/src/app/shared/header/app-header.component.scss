@@ -1,25 +1,120 @@
 @use 'layout' as layout;
 @use 'breakpoints' as bp;
 
-.app-header {
-  display: none;
+.app-nav {
   border-bottom: 1px solid #d8d8d8;
-  padding: 0.25rem 0;
   background: #fff;
 }
 
-.app-header__inner {
+.app-nav__inner {
   @include layout.container;
   display: flex;
   align-items: center;
+  gap: var(--space-4);
+  padding: 0.25rem 0;
 }
 
-.app-header__logo {
+.app-nav__logo {
   height: 3.5rem;
 }
 
+.app-nav__links {
+  display: none;
+  gap: var(--space-4);
+  margin-left: auto;
+}
+
+.app-nav__link {
+  text-decoration: none;
+  color: #4d4d4d;
+  font-weight: 500;
+}
+
+.app-nav__link--active {
+  color: #673ab7;
+}
+
+.app-nav__actions {
+  display: none;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.app-nav__logout {
+  color: #b00020;
+}
+
+.app-nav__burger {
+  margin-left: auto;
+}
+
+.app-nav__overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.18);
+  z-index: 50;
+}
+
+.app-nav__drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 66.666vw;
+  max-width: 20rem;
+  background: #fff;
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.12);
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-4);
+  gap: var(--space-4);
+}
+
+.app-nav__drawer-close {
+  align-self: flex-end;
+}
+
+.app-nav__drawer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.app-nav__drawer-link {
+  text-decoration: none;
+  color: #4d4d4d;
+  font-weight: 500;
+}
+
+.app-nav__drawer-logout {
+  color: #b00020;
+  align-self: flex-start;
+}
+
+.app-nav__drawer-avatar {
+  margin-top: auto;
+  align-self: flex-end;
+  border: 1px solid #000;
+  border-radius: 999px;
+  margin-bottom: 2rem;
+}
+
 @include bp.up(md) {
-  .app-header {
-    display: block;
+  .app-nav__links {
+    display: flex;
+  }
+
+  .app-nav__actions {
+    display: flex;
+  }
+
+  .app-nav__burger {
+    display: none;
+  }
+
+  .app-nav__overlay,
+  .app-nav__drawer {
+    display: none;
   }
 }

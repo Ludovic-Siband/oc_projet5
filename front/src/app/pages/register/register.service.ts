@@ -3,13 +3,14 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { ApiError } from '../../shared/models/api-error.model';
 import { RegisterError, RegisterRequest, RegisterResponse } from './register.model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class RegisterService {
   private readonly http = inject(HttpClient);
 
   register(payload: RegisterRequest): Observable<RegisterResponse> {
-    return this.http.post<RegisterResponse>('/api/auth/register', payload).pipe(
+    return this.http.post<RegisterResponse>(`${environment.apiBaseUrl}/api/auth/register`, payload).pipe(
       catchError((error: HttpErrorResponse) => throwError(() => this.toRegisterError(error))),
     );
   }

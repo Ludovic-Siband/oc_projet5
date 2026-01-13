@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable, tap } from 'rxjs';
+import { finalize, map, Observable, tap } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 type RefreshResponse = { accessToken: string };
 
@@ -24,11 +25,17 @@ export class AuthService {
 
   refreshAccessToken(): Observable<string> {
     return this.http
-      .post<RefreshResponse>('/api/auth/refresh', {}, { withCredentials: true })
+      .post<RefreshResponse>(`${environment.apiBaseUrl}/api/auth/refresh`, {}, { withCredentials: true })
       .pipe(
         tap((response) => this.setAccessToken(response.accessToken)),
         map((response) => response.accessToken),
       );
+  }
+
+  logout(): Observable<void> {
+    return this.http.post<void>(`${environment.apiBaseUrl}/api/auth/logout`, {}, { withCredentials: true }).pipe(
+      finalize(() => this.clearAccessToken()),
+    );
   }
 
   private safeStorageGet(key: string): string | null {

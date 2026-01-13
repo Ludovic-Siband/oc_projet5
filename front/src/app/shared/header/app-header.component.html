@@ -1,5 +1,38 @@
-<header class="app-header">
-  <div class="app-header__inner">
-    <img class="app-header__logo" src="assets/logo_p6.png" alt="Logo MDD" />
+<header class="app-nav">
+  <div class="app-nav__inner">
+    <img class="app-nav__logo" src="assets/logo_p6.png" alt="Logo MDD" />
+
+    <nav class="app-nav__links">
+      <a class="app-nav__link" routerLink="/feed" routerLinkActive="app-nav__link--active">Articles</a>
+      <a class="app-nav__link" routerLink="/subjects" routerLinkActive="app-nav__link--active">Thèmes</a>
+    </nav>
+
+    <div class="app-nav__actions">
+      <button class="app-nav__logout" matButton (click)="logout()">Se déconnecter</button>
+      <a class="app-nav__avatar" mat-icon-button routerLink="/user">
+        <mat-icon>person</mat-icon>
+      </a>
+    </div>
+
+    <button class="app-nav__burger" mat-icon-button type="button" aria-label="Menu" (click)="toggleMenu()">
+      <mat-icon>menu</mat-icon>
+    </button>
   </div>
 </header>
+
+@if (isMenuOpen()) {
+  <div class="app-nav__overlay" (click)="closeMenu()"></div>
+  <aside class="app-nav__drawer" role="dialog" aria-label="Navigation">
+    <button class="app-nav__drawer-close" mat-icon-button type="button" (click)="closeMenu()" aria-label="Fermer">
+      <mat-icon>close</mat-icon>
+    </button>
+    <nav class="app-nav__drawer-nav">
+      <button class="app-nav__drawer-logout" matButton type="button" (click)="logout()">Se déconnecter</button>
+      <a class="app-nav__drawer-link" routerLink="/feed" (click)="closeMenu()">Articles</a>
+      <a class="app-nav__drawer-link" routerLink="/subjects" (click)="closeMenu()">Thèmes</a>
+    </nav>
+    <a class="app-nav__drawer-avatar" mat-icon-button routerLink="/user" (click)="closeMenu()">
+      <mat-icon>person</mat-icon>
+    </a>
+  </aside>
+}

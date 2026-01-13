@@ -3,13 +3,14 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { ApiError } from '../../shared/models/api-error.model';
 import { LoginError, LoginRequest, LoginResponse } from './login.model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class LoginService {
   private readonly http = inject(HttpClient);
 
   login(payload: LoginRequest): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>('/api/auth/login', payload).pipe(
+    return this.http.post<LoginResponse>(`${environment.apiBaseUrl}/api/auth/login`, payload).pipe(
       catchError((error: HttpErrorResponse) => throwError(() => this.toLoginError(error))),
     );
   }
