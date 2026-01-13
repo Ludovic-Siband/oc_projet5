@@ -1,0 +1,94 @@
+@use 'layout' as layout;
+@use 'breakpoints' as bp;
+
+.register {
+  min-height: 100vh;
+  background: #fff;
+}
+
+.register__panel {
+  @include layout.container;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding-top: clamp(1.5rem, 8vh, 4rem);
+  padding-bottom: var(--space-6);
+}
+
+.register__back {
+  align-self: flex-start;
+  min-width: auto;
+  padding-inline: 0;
+  font-size: 2.5rem;
+  font-weight: 500;
+}
+
+.register__logo {
+  width: clamp(11.25rem, 60vw, 16.25rem);
+  height: auto;
+}
+
+.register__title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.register__form {
+  display: grid;
+  gap: var(--space-4);
+  width: min(22.5rem, 100%);
+}
+
+.register__field {
+  width: 100%;
+}
+
+.register__submit {
+  justify-self: center;
+  padding-inline: 1.75rem;
+}
+
+.register__error {
+  margin: 0;
+  color: #b00020;
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+@include bp.up(md) {
+  .register__panel {
+    display: grid;
+    grid-template-columns: 3rem 1fr 3rem;
+    row-gap: var(--space-5);
+    justify-items: center;
+    padding-top: clamp(2rem, 6vh, 5rem);
+  }
+
+  .register__back {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+  }
+
+  .register__logo {
+    display: none;
+  }
+
+  .register__title {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .register__form {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+}
+
+@include bp.down(sm) {
+  .register__logo {
+    width: clamp(13.125rem, 70vw, 17.5rem);
+  }
+}

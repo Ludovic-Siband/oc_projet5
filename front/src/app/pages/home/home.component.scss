@@ -14,18 +14,18 @@
   @include layout.stack(var(--space-5));
   align-items: center;
   text-align: center;
-  padding-top: clamp(48px, 12vh, 120px);
+  padding-top: clamp(3rem, 12vh, 7.5rem);
 }
 
 .home__logo {
-  width: clamp(200px, 55vw, 320px);
+  width: clamp(12.5rem, 55vw, 20rem);
   height: auto;
 }
 
 .home__actions {
   @include layout.grid(1, var(--space-3));
   width: 100%;
-  max-width: 420px;
+  max-width: 26.25rem;
   justify-items: stretch;
 }
 
@@ -41,6 +41,6 @@
 
 @include bp.down(sm) {
   .home__logo {
-    width: clamp(220px, 70vw, 320px);
+    width: clamp(13.75rem, 70vw, 20rem);
   }
 }
