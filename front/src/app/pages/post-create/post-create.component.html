@@ -1,0 +1,59 @@
+<main class="post-create">
+  <div class="post-create__inner">
+    <a class="post-create__back" matButton routerLink="/feed">←</a>
+
+    <h1 class="post-create__title">Créer un nouvel article</h1>
+
+    <form class="post-create__form" [formGroup]="form" (ngSubmit)="submit()">
+      <mat-form-field appearance="outline" class="post-create__field">
+        <mat-label>Sélectionner un thème</mat-label>
+        <mat-select formControlName="subjectId" [disabled]="loading()">
+          @for (subject of subjects(); track subject.id) {
+            <mat-option [value]="subject.id">{{ subject.name }}</mat-option>
+          }
+        </mat-select>
+        @if (form.controls.subjectId.touched && form.controls.subjectId.hasError('required')) {
+          <mat-error>Le thème est requis.</mat-error>
+        }
+        @if (form.controls.subjectId.touched && form.controls.subjectId.hasError('server')) {
+          <mat-error>{{ form.controls.subjectId.getError('server') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="post-create__field">
+        <mat-label>Titre de l'article</mat-label>
+        <input matInput formControlName="title" />
+        @if (form.controls.title.touched && form.controls.title.hasError('required')) {
+          <mat-error>Le titre est requis.</mat-error>
+        }
+        @if (form.controls.title.touched && form.controls.title.hasError('maxlength')) {
+          <mat-error>Le titre ne peut pas dépasser 255 caractères.</mat-error>
+        }
+        @if (form.controls.title.touched && form.controls.title.hasError('server')) {
+          <mat-error>{{ form.controls.title.getError('server') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="post-create__field">
+        <mat-label>Contenu de l'article</mat-label>
+        <textarea matInput rows="6" formControlName="content"></textarea>
+        @if (form.controls.content.touched && form.controls.content.hasError('required')) {
+          <mat-error>Le contenu est requis.</mat-error>
+        }
+        @if (form.controls.content.touched && form.controls.content.hasError('server')) {
+          <mat-error>{{ form.controls.content.getError('server') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <button
+        class="post-create__submit"
+        matButton="filled"
+        color="primary"
+        type="submit"
+        [disabled]="saving() || form.invalid"
+      >
+        Créer
+      </button>
+    </form>
+  </div>
+</main>

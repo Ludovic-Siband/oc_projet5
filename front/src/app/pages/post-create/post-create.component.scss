@@ -1,0 +1,45 @@
+.post-create {
+  width: 100%;
+  box-sizing: border-box;
+  padding: var(--space-5) var(--gutter) var(--space-6);
+  background: #fff;
+}
+
+.post-create__inner {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.post-create__back {
+  align-self: flex-start;
+  min-width: auto;
+  padding-inline: 0;
+  font-size: 1.75rem;
+  font-weight: 500;
+}
+
+.post-create__title {
+  margin: 0;
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.post-create__form {
+  display: grid;
+  gap: var(--space-4);
+  width: min(24rem, 100%);
+  margin-inline: auto;
+}
+
+.post-create__field {
+  width: 100%;
+}
+
+.post-create__submit {
+  justify-self: center;
+  padding-inline: 2rem;
+}
