@@ -13,6 +13,10 @@ export const routes: Routes = [
       import('./layouts/app-layout/app-layout.component').then((module) => module.AppLayoutComponent),
     children: [
       {
+        path: 'login',
+        loadComponent: () => import('./pages/login/login.component').then((module) => module.LoginComponent),
+      },
+      {
         path: 'register',
         loadComponent: () =>
           import('./pages/register/register.component').then((module) => module.RegisterComponent),
