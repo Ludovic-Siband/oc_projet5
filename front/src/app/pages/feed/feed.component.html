@@ -1,0 +1,35 @@
+<main class="container">
+  <div class="feed__inner">
+    <div class="feed__toolbar">
+      <button class="feed__create" matButton="filled" color="primary" type="button">
+        Créer un article
+      </button>
+
+      <button class="feed__sort" matButton type="button" (click)="toggleSort()">
+        Trier par
+        <mat-icon>{{ sort() === 'desc' ? 'arrow_downward' : 'arrow_upward' }}</mat-icon>
+      </button>
+    </div>
+
+    @if (loading()) {
+      <p class="feed__status">Chargement...</p>
+    }
+
+    @if (!loading() && posts().length === 0) {
+      <p class="feed__status">Aucun article disponible.</p>
+    }
+
+    <section class="feed__grid">
+      @for (post of posts(); track post.id) {
+        <mat-card class="feed__card">
+          <h2 class="feed__title">{{ post.title }}</h2>
+          <div class="feed__meta">
+            <span>{{ post.createdAt | date: 'dd/MM/yyyy' }}</span>
+            <span>{{ post.author }}</span>
+          </div>
+          <p class="feed__content">{{ post.content }}</p>
+        </mat-card>
+      }
+    </section>
+  </div>
+</main>

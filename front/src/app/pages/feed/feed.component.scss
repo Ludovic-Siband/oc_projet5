@@ -1,0 +1,70 @@
+@use 'layout' as layout;
+@use 'breakpoints' as bp; 
+
+.feed__inner {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding: var(--space-5) var(--gutter) var(--space-6);
+  box-sizing: border-box;
+}
+
+.feed__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.feed__sort {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.feed__status {
+  margin: var(--space-4) 0 0;
+  color: #6b6b6b;
+}
+
+.feed__grid {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.feed__card {
+  padding: var(--space-4);
+  border-radius: 0.75rem;
+  box-shadow: none;
+  background: #f5f5f5;
+}
+
+.feed__title {
+  margin: 0 0 var(--space-2);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.feed__meta {
+  display: flex;
+  justify-content: space-between;
+  color: #6b6b6b;
+  font-size: 0.875rem;
+  margin-bottom: var(--space-3);
+}
+
+.feed__content {
+  margin: 0;
+  color: #333;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@include bp.up(md) {
+  .feed__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
