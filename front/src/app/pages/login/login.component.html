@@ -1,0 +1,43 @@
+<main class="container">
+  <div class="login__inner">
+    <section class="login__panel">
+      <a class="login__back" matButton routerLink="/">⟵</a>
+      <img class="login__logo" src="assets/logo_p6.png" alt="Logo MDD" />
+      <h1 class="login__title">Se connecter</h1>
+
+    <form class="login__form" [formGroup]="form" (ngSubmit)="submit()">
+      <mat-form-field appearance="outline" class="login__field">
+        <mat-label>E-mail ou nom d'utilisateur</mat-label>
+        <input matInput formControlName="identifier" autocomplete="username" />
+        @if (form.controls.identifier.touched && form.controls.identifier.hasError('required')) {
+          <mat-error>L'identifiant est requis.</mat-error>
+        }
+        @if (form.controls.identifier.touched && form.controls.identifier.hasError('server')) {
+          <mat-error>{{ form.controls.identifier.getError('server') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="login__field">
+        <mat-label>Mot de passe</mat-label>
+        <input matInput type="password" formControlName="password" autocomplete="current-password" />
+        @if (form.controls.password.touched && form.controls.password.hasError('required')) {
+          <mat-error>Le mot de passe est requis.</mat-error>
+        }
+        @if (form.controls.password.touched && form.controls.password.hasError('server')) {
+          <mat-error>{{ form.controls.password.getError('server') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <button
+        class="login__submit"
+        matButton="filled"
+        color="primary"
+        type="submit"
+        [disabled]="loading() || form.invalid"
+      >
+        Se connecter
+      </button>
+    </form>
+    </section>
+  </div>
+</main>

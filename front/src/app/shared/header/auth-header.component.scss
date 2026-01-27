@@ -1,0 +1,29 @@
+@use 'layout' as layout;
+@use 'breakpoints' as bp;
+
+.app-header {
+  display: none;
+  border-bottom: 1px solid #d8d8d8;
+  padding: 0.25rem 0;
+  background: #fff;
+}
+
+.app-header__inner {
+  @include layout.container;
+  display: flex;
+  align-items: center;
+}
+
+.app-header__logo {
+  height: 3.5rem;
+}
+
+.app-header__logo-link {
+  display: inline-flex;
+}
+
+@include bp.up(md) {
+  .app-header {
+    display: block;
+  }
+}

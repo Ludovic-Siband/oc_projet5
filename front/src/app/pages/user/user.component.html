@@ -1,0 +1,81 @@
+<main class="user">
+  <div class="user__inner">
+    <section class="user__profile">
+      <h1 class="user__title">Profil utilisateur</h1>
+
+      <form class="user__form" [formGroup]="form" (ngSubmit)="save()">
+        <mat-form-field appearance="outline" class="user__field">
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="username" autocomplete="username" />
+          @if (form.controls.username.touched && form.controls.username.hasError('minlength')) {
+          <mat-error>Le nom d'utilisateur doit contenir au moins 3 caractères.</mat-error>
+          }
+          @if (form.controls.username.touched && form.controls.username.hasError('maxlength')) {
+          <mat-error>Le nom d'utilisateur ne peut pas dépasser 50 caractères.</mat-error>
+          }
+          @if (form.controls.username.touched && form.controls.username.hasError('server')) {
+          <mat-error>{{ form.controls.username.getError('server') }}</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="user__field">
+          <mat-label>email@email.fr</mat-label>
+          <input matInput formControlName="email" autocomplete="email" />
+          @if (form.controls.email.touched && form.controls.email.hasError('email')) {
+          <mat-error>Le format d'e-mail est invalide.</mat-error>
+          }
+          @if (form.controls.email.touched && form.controls.email.hasError('server')) {
+          <mat-error>{{ form.controls.email.getError('server') }}</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="user__field">
+          <mat-label>Mot de passe</mat-label>
+          <input matInput type="password" formControlName="password" autocomplete="new-password" />
+          @if (form.controls.password.touched && form.controls.password.hasError('minlength')) {
+          <mat-error>Le mot de passe doit contenir au moins 8 caractères.</mat-error>
+          }
+          @if (form.controls.password.touched && form.controls.password.hasError('pattern')) {
+          <mat-error>
+            Le mot de passe doit contenir 1 minuscule, 1 majuscule, 1 chiffre et 1 caractère spécial.
+          </mat-error>
+          }
+          @if (form.controls.password.touched && form.controls.password.hasError('server')) {
+          <mat-error>{{ form.controls.password.getError('server') }}</mat-error>
+          }
+        </mat-form-field>
+
+        <button class="user__submit" matButton="filled" color="primary" type="submit"
+          [disabled]="saving() || form.invalid">
+          Sauvegarder
+        </button>
+      </form>
+    </section>
+
+    <div class="user__divider"></div>
+
+    <section class="user__subscriptions">
+      <h2 class="user__subtitle">Abonnements</h2>
+
+      @if (loadingProfile()) {
+      <p class="user__status">Chargement...</p>
+      }
+
+      @if (!loadingProfile() && subscriptions().length === 0) {
+      <p class="user__status">Aucun abonnement actif.</p>
+      }
+
+      <div class="user__grid">
+        @for (subscription of subscriptions(); track subscription.subjectId) {
+        <mat-card class="user__card">
+          <h3 class="user__card-title">{{ subscription.name }}</h3>
+          <p class="user__card-description">Description: {{ subscription.description }}</p>
+          <button matButton="filled" color="primary" type="button" (click)="unsubscribe(subscription.subjectId)">
+            Se désabonner
+          </button>
+        </mat-card>
+        }
+      </div>
+    </section>
+  </div>
+</main>

@@ -1,10 +1,87 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './core/auth/auth.guard';
 
 export const routes: Routes = [
   {
     path: '',
     loadComponent: () =>
       import('./pages/home/home.component').then((module) => module.HomeComponent),
+    pathMatch: 'full',
+  },
+  {
+    path: 'login',
+    loadComponent: () =>
+      import('./layouts/auth-layout/auth-layout.component').then((module) => module.AuthLayoutComponent),
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./pages/login/login.component').then((module) => module.LoginComponent),
+      },
+    ],
+  },
+  {
+    path: 'register',
+    loadComponent: () =>
+      import('./layouts/auth-layout/auth-layout.component').then((module) => module.AuthLayoutComponent),
+    children: [
+      {
+        path: '',
+        loadComponent: () =>
+          import('./pages/register/register.component').then((module) => module.RegisterComponent),
+      },
+    ],
+  },
+  {
+    path: 'feed',
+    loadComponent: () =>
+      import('./layouts/app-layout/app-layout.component').then((module) => module.AppLayoutComponent),
+    canMatch: [authGuard],
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./pages/feed/feed.component').then((module) => module.FeedComponent),
+      },
+      {
+        path: 'posts/:id',
+        loadComponent: () => import('./pages/post-detail/post-detail.component').then((module) => module.PostDetailComponent),
+      },
+    ],
+  },
+  {
+    path: 'user',
+    loadComponent: () =>
+      import('./layouts/app-layout/app-layout.component').then((module) => module.AppLayoutComponent),
+    canMatch: [authGuard],
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./pages/user/user.component').then((module) => module.UserComponent),
+      },
+    ],
+  },
+  {
+    path: 'posts',
+    loadComponent: () =>
+      import('./layouts/app-layout/app-layout.component').then((module) => module.AppLayoutComponent),
+    canMatch: [authGuard],
+    children: [
+      {
+        path: 'create',
+        loadComponent: () =>
+          import('./pages/post-create/post-create.component').then((module) => module.PostCreateComponent),
+      },
+    ],
+  },
+  {
+    path: 'subjects',
+    loadComponent: () =>
+      import('./layouts/app-layout/app-layout.component').then((module) => module.AppLayoutComponent),
+    canMatch: [authGuard],
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./pages/subjects/subjects.component').then((module) => module.SubjectsComponent),
+      },
+    ],
   },
 ];
-

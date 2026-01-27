@@ -1,0 +1,29 @@
+<main class="subjects">
+  <div class="subjects__inner">
+    @if (loading()) {
+      <p class="subjects__status">Chargement...</p>
+    }
+
+    <section class="subjects__grid">
+      @for (subject of subjects(); track subject.id) {
+        <mat-card class="subjects__card">
+          <h2 class="subjects__title">{{ subject.name }}</h2>
+          <p class="subjects__description">Description: {{ subject.description }}</p>
+          <button
+            matButton="filled"
+            color="primary"
+            type="button"
+            [disabled]="subject.subscribed || isSubscribing(subject.id)"
+            (click)="subscribe(subject)"
+          >
+            @if (subject.subscribed) {
+              Déjà abonné
+            } @else {
+              S'abonner
+            }
+          </button>
+        </mat-card>
+      }
+    </section>
+  </div>
+</main>

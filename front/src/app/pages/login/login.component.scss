@@ -1,0 +1,90 @@
+@use 'layout' as layout;
+@use 'breakpoints' as bp;
+
+.login__inner {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding: var(--space-5) var(--gutter) var(--space-6);
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.login__panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding-top: clamp(1.5rem, 8vh, 4rem);
+  padding-bottom: var(--space-6);
+}
+
+.login__back {
+  align-self: flex-start;
+  min-width: auto;
+  padding-inline: 0;
+  font-size: 2.5rem;
+  font-weight: 500;
+}
+
+.login__logo {
+  width: clamp(11.25rem, 60vw, 16.25rem);
+  height: auto;
+}
+
+.login__title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.login__form {
+  display: grid;
+  gap: var(--space-4);
+  width: min(22.5rem, 100%);
+}
+
+.login__field {
+  width: 100%;
+}
+
+.login__submit {
+  justify-self: center;
+  padding-inline: 1.75rem;
+}
+
+@include bp.up(md) {
+  .login__panel {
+    display: grid;
+    grid-template-columns: 3rem 1fr 3rem;
+    row-gap: var(--space-5);
+    justify-items: center;
+    padding-top: clamp(2rem, 6vh, 5rem);
+  }
+
+  .login__back {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+  }
+
+  .login__logo {
+    display: none;
+  }
+
+  .login__title {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .login__form {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+}
+
+@include bp.down(sm) {
+  .login__logo {
+    width: clamp(13.125rem, 70vw, 17.5rem);
+  }
+}

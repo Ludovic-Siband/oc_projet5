@@ -12,7 +12,6 @@ import com.openclassrooms.mddapi.domain.User;
 import com.openclassrooms.mddapi.exception.NotFoundException;
 import com.openclassrooms.mddapi.feature.post.dto.CommentResponse;
 import com.openclassrooms.mddapi.feature.post.dto.CreateCommentRequest;
-import com.openclassrooms.mddapi.feature.post.dto.CreateCommentResponse;
 import com.openclassrooms.mddapi.feature.post.dto.CreatePostRequest;
 import com.openclassrooms.mddapi.feature.post.dto.CreatePostResponse;
 import com.openclassrooms.mddapi.feature.post.dto.PostDetailResponse;
@@ -68,13 +67,12 @@ public class PostService {
 	}
 
 	@Transactional
-	public CreateCommentResponse addComment(long userId, long postId, CreateCommentRequest request) {
+	public void addComment(long userId, long postId, CreateCommentRequest request) {
 		Post post = postRepository.findById(postId)
 				.orElseThrow(() -> new NotFoundException("Article introuvable"));
 		User author = userRepository.findById(userId)
 				.orElseThrow(() -> new NotFoundException("Utilisateur introuvable"));
 
-		Comment saved = commentRepository.save(new Comment(post, author, request.content()));
-		return new CreateCommentResponse(saved.getId());
+		commentRepository.save(new Comment(post, author, request.content()));
 	}
 }

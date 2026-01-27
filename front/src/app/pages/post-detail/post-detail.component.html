@@ -1,0 +1,53 @@
+<main class="post-detail">
+  <div class="post-detail__inner">
+    <a class="post-detail__back" matButton routerLink="/feed">←</a>
+
+    @if (loading()) {
+      <p class="post-detail__status">Chargement...</p>
+    }
+
+    @if (!loading() && post()) {
+      <section class="post-detail__content">
+        <h1 class="post-detail__title">{{ post()!.title }}</h1>
+        <div class="post-detail__meta">
+          <span>{{ post()!.createdAt | date: 'dd/MM/yyyy' }}</span>
+          <span>{{ post()!.author }}</span>
+          <span>{{ post()!.subject.name }}</span>
+        </div>
+        <p class="post-detail__body">{{ post()!.content }}</p>
+      </section>
+
+      <div class="post-detail__divider"></div>
+
+      <section class="post-detail__comments">
+        <h2 class="post-detail__subtitle">Commentaires</h2>
+
+        <div class="post-detail__comment-list">
+          @for (comment of comments(); track comment.id) {
+            <div class="post-detail__comment">
+              <div class="post-detail__comment-author">{{ comment.author }}</div>
+              <div class="post-detail__comment-body">{{ comment.content }}</div>
+            </div>
+          }
+        </div>
+
+        <form class="post-detail__form" [formGroup]="commentForm" (ngSubmit)="submitComment()">
+          <mat-form-field appearance="outline" class="post-detail__field">
+            <mat-label>Écrivez ici votre commentaire</mat-label>
+            <textarea matInput rows="3" formControlName="content"></textarea>
+            @if (commentForm.controls.content.touched && commentForm.controls.content.hasError('required')) {
+              <mat-error>Le commentaire est requis.</mat-error>
+            }
+            @if (commentForm.controls.content.touched && commentForm.controls.content.hasError('maxlength')) {
+              <mat-error>Le commentaire est trop long.</mat-error>
+            }
+          </mat-form-field>
+
+          <button class="post-detail__send" mat-icon-button type="submit" [disabled]="posting() || commentForm.invalid">
+            <mat-icon>send</mat-icon>
+          </button>
+        </form>
+      </section>
+    }
+  </div>
+</main>

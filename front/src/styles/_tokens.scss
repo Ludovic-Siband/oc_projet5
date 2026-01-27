@@ -1,0 +1,29 @@
+@use './breakpoints' as *;
+
+:root {
+  --container-max: 1200px;
+  --gutter: 16px;
+  --grid-gap: 16px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+}
+
+@include up(md) {
+  :root {
+    --container-max: 1280px;
+    --gutter: 24px;
+    --grid-gap: 24px;
+  }
+}
+
+@include up(lg) {
+  :root {
+    --container-max: 1360px;
+    --gutter: 32px;
+    --grid-gap: 32px;
+  }
+}
