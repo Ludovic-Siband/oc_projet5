@@ -98,7 +98,9 @@
           "options": {
             "runner": "vitest",
             "buildTarget": "front:build:development",
-            "watch": false
+            "watch": false,
+            "coverage": true,
+            "coverageExclude": ["**/*.html"]
           }
         }
       }
