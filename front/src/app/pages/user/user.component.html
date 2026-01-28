@@ -6,7 +6,7 @@
       <form class="user__form" [formGroup]="form" (ngSubmit)="save()">
         <mat-form-field appearance="outline" class="user__field">
           <mat-label>Username</mat-label>
-          <input matInput formControlName="username" autocomplete="username" />
+        <input matInput formControlName="username" autocomplete="username" data-cy="user-username" />
           @if (form.controls.username.touched && form.controls.username.hasError('minlength')) {
           <mat-error>Le nom d'utilisateur doit contenir au moins 3 caractères.</mat-error>
           }
@@ -20,7 +20,7 @@
 
         <mat-form-field appearance="outline" class="user__field">
           <mat-label>email@email.fr</mat-label>
-          <input matInput formControlName="email" autocomplete="email" />
+        <input matInput formControlName="email" autocomplete="email" data-cy="user-email" />
           @if (form.controls.email.touched && form.controls.email.hasError('email')) {
           <mat-error>Le format d'e-mail est invalide.</mat-error>
           }
@@ -31,7 +31,13 @@
 
         <mat-form-field appearance="outline" class="user__field">
           <mat-label>Mot de passe</mat-label>
-          <input matInput type="password" formControlName="password" autocomplete="new-password" />
+          <input
+            matInput
+            type="password"
+            formControlName="password"
+            autocomplete="new-password"
+            data-cy="user-password"
+          />
           @if (form.controls.password.touched && form.controls.password.hasError('minlength')) {
           <mat-error>Le mot de passe doit contenir au moins 8 caractères.</mat-error>
           }
@@ -45,8 +51,14 @@
           }
         </mat-form-field>
 
-        <button class="user__submit" matButton="filled" color="primary" type="submit"
-          [disabled]="saving() || form.invalid">
+        <button
+          class="user__submit"
+          matButton="filled"
+          color="primary"
+          type="submit"
+          [disabled]="saving() || form.invalid"
+          data-cy="user-submit"
+        >
           Sauvegarder
         </button>
       </form>
@@ -58,19 +70,25 @@
       <h2 class="user__subtitle">Abonnements</h2>
 
       @if (loadingProfile()) {
-      <p class="user__status">Chargement...</p>
+      <p class="user__status" data-cy="user-loading">Chargement...</p>
       }
 
       @if (!loadingProfile() && subscriptions().length === 0) {
-      <p class="user__status">Aucun abonnement actif.</p>
+      <p class="user__status" data-cy="user-empty">Aucun abonnement actif.</p>
       }
 
       <div class="user__grid">
         @for (subscription of subscriptions(); track subscription.subjectId) {
-        <mat-card class="user__card">
+        <mat-card class="user__card" [attr.data-cy]="'user-subscription-' + subscription.subjectId">
           <h3 class="user__card-title">{{ subscription.name }}</h3>
           <p class="user__card-description">Description: {{ subscription.description }}</p>
-          <button matButton="filled" color="primary" type="button" (click)="unsubscribe(subscription.subjectId)">
+          <button
+            matButton="filled"
+            color="primary"
+            type="button"
+            (click)="unsubscribe(subscription.subjectId)"
+            [attr.data-cy]="'user-unsubscribe-' + subscription.subjectId"
+          >
             Se désabonner
           </button>
         </mat-card>

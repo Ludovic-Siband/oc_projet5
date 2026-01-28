@@ -1,28 +1,32 @@
 <main class="container">
   <div class="feed__inner">
     <div class="feed__toolbar">
-      <a class="feed__create" matButton="filled" color="primary" routerLink="/posts/create">
+      <a class="feed__create" matButton="filled" color="primary" routerLink="/posts/create" data-cy="feed-create">
         Créer un article
       </a>
 
-      <button class="feed__sort" matButton type="button" (click)="toggleSort()">
+      <button class="feed__sort" matButton type="button" (click)="toggleSort()" data-cy="feed-sort">
         Trier par
         <mat-icon>{{ sort() === 'desc' ? 'arrow_downward' : 'arrow_upward' }}</mat-icon>
       </button>
     </div>
 
     @if (loading()) {
-      <p class="feed__status">Chargement...</p>
+      <p class="feed__status" data-cy="feed-loading">Chargement...</p>
     }
 
     @if (!loading() && posts().length === 0) {
-      <p class="feed__status">Aucun article disponible.</p>
+      <p class="feed__status" data-cy="feed-empty">Aucun article disponible.</p>
     }
 
     <section class="feed__grid">
       @for (post of posts(); track post.id) {
-        <mat-card class="feed__card">
-          <mat-card-action-area class="feed__card-action" routerLink="/feed/posts/{{ post.id }}">
+        <mat-card class="feed__card" [attr.data-cy]="'feed-card-' + post.id">
+          <mat-card-action-area
+            class="feed__card-action"
+            routerLink="/feed/posts/{{ post.id }}"
+            [attr.data-cy]="'feed-card-link-' + post.id"
+          >
             <h2 class="feed__title">{{ post.title }}</h2>
             <div class="feed__meta">
               <span>{{ post.createdAt | date: 'dd/MM/yyyy' }}</span>

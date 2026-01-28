@@ -34,6 +34,9 @@ yarn-error.log
 /connect.lock
 /coverage
 /libpeerconnection.log
+/cypress/screenshots
+/cypress/videos
+/.nyc_output
 testem.log
 /typings
 

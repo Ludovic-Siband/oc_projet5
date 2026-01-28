@@ -1,39 +1,72 @@
 <header class="app-nav">
   <div class="app-nav__inner">
-    <a class="app-nav__logo-link" routerLink="/feed" aria-label="Aller au feed">
+    <a class="app-nav__logo-link" routerLink="/feed" aria-label="Aller au feed" data-cy="header-logo">
       <img class="app-nav__logo" src="assets/logo_p6.png" alt="Logo MDD" />
     </a>
 
     <nav class="app-nav__links">
-      <a class="app-nav__link" routerLink="/feed" routerLinkActive="app-nav__link--active">Articles</a>
-      <a class="app-nav__link" routerLink="/subjects" routerLinkActive="app-nav__link--active">Thèmes</a>
+      <a class="app-nav__link" routerLink="/feed" routerLinkActive="app-nav__link--active" data-cy="header-link-feed">
+        Articles
+      </a>
+      <a class="app-nav__link" routerLink="/subjects" routerLinkActive="app-nav__link--active" data-cy="header-link-subjects">
+        Thèmes
+      </a>
     </nav>
 
     <div class="app-nav__actions">
-      <button class="app-nav__logout" matButton color="warn" (click)="logout()">Se déconnecter</button>
-      <a class="app-nav__avatar" mat-icon-button routerLink="/user">
+      <button class="app-nav__logout" matButton color="warn" (click)="logout()" data-cy="header-logout">
+        Se déconnecter
+      </button>
+      <a class="app-nav__avatar" mat-icon-button routerLink="/user" data-cy="header-link-user">
         <mat-icon>person</mat-icon>
       </a>
     </div>
 
-    <button class="app-nav__burger" mat-icon-button type="button" aria-label="Menu" (click)="toggleMenu()">
+    <button
+      class="app-nav__burger"
+      mat-icon-button
+      type="button"
+      aria-label="Menu"
+      data-cy="header-burger"
+      (click)="toggleMenu()"
+    >
       <mat-icon>menu</mat-icon>
     </button>
   </div>
 </header>
 
 @if (isMenuOpen()) {
-  <div class="app-nav__overlay" (click)="closeMenu()"></div>
-  <aside class="app-nav__drawer" role="dialog" aria-label="Navigation">
-    <button class="app-nav__drawer-close" mat-icon-button type="button" (click)="closeMenu()" aria-label="Fermer">
+  <div class="app-nav__overlay" (click)="closeMenu()" data-cy="header-overlay"></div>
+  <aside class="app-nav__drawer" role="dialog" aria-label="Navigation" data-cy="header-drawer">
+    <button
+      class="app-nav__drawer-close"
+      mat-icon-button
+      type="button"
+      (click)="closeMenu()"
+      aria-label="Fermer"
+      data-cy="header-drawer-close"
+    >
       <mat-icon>close</mat-icon>
     </button>
     <nav class="app-nav__drawer-nav">
-      <button class="app-nav__drawer-logout" matButton color="warn" type="button" (click)="logout()">Se déconnecter</button>
-      <a class="app-nav__drawer-link" routerLink="/feed" (click)="closeMenu()">Articles</a>
-      <a class="app-nav__drawer-link" routerLink="/subjects" (click)="closeMenu()">Thèmes</a>
+      <button
+        class="app-nav__drawer-logout"
+        matButton
+        color="warn"
+        type="button"
+        (click)="logout()"
+        data-cy="header-drawer-logout"
+      >
+        Se déconnecter
+      </button>
+      <a class="app-nav__drawer-link" routerLink="/feed" (click)="closeMenu()" data-cy="header-drawer-feed">
+        Articles
+      </a>
+      <a class="app-nav__drawer-link" routerLink="/subjects" (click)="closeMenu()" data-cy="header-drawer-subjects">
+        Thèmes
+      </a>
     </nav>
-    <a class="app-nav__drawer-avatar" mat-icon-button routerLink="/user" (click)="closeMenu()">
+    <a class="app-nav__drawer-avatar" mat-icon-button routerLink="/user" (click)="closeMenu()" data-cy="header-drawer-user">
       <mat-icon>person</mat-icon>
     </a>
   </aside>

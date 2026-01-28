@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
   },
   "private": true,
   "dependencies": {
@@ -29,6 +31,7 @@
     "@angular/compiler-cli": "^21.0.0",
     "@types/node": "^25.0.3",
     "@vitest/coverage-v8": "^4.0.18",
+    "cypress": "^13.13.0",
     "jsdom": "^27.4.0",
     "typescript": "~5.9.0",
     "vitest": "^4.0.8"

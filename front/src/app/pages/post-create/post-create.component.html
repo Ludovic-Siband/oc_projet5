@@ -7,9 +7,11 @@
     <form class="post-create__form" [formGroup]="form" (ngSubmit)="submit()">
       <mat-form-field appearance="outline" class="post-create__field">
         <mat-label>Sélectionner un thème</mat-label>
-        <mat-select formControlName="subjectId" [disabled]="loading()">
+        <mat-select formControlName="subjectId" [disabled]="loading()" data-cy="post-create-subject">
           @for (subject of subjects(); track subject.id) {
-            <mat-option [value]="subject.id">{{ subject.name }}</mat-option>
+            <mat-option [value]="subject.id" [attr.data-cy]="'post-create-option-' + subject.id">
+              {{ subject.name }}
+            </mat-option>
           }
         </mat-select>
         @if (form.controls.subjectId.touched && form.controls.subjectId.hasError('required')) {
@@ -22,7 +24,7 @@
 
       <mat-form-field appearance="outline" class="post-create__field">
         <mat-label>Titre de l'article</mat-label>
-        <input matInput formControlName="title" />
+        <input matInput formControlName="title" data-cy="post-create-title" />
         @if (form.controls.title.touched && form.controls.title.hasError('required')) {
           <mat-error>Le titre est requis.</mat-error>
         }
@@ -36,7 +38,7 @@
 
       <mat-form-field appearance="outline" class="post-create__field">
         <mat-label>Contenu de l'article</mat-label>
-        <textarea matInput rows="6" formControlName="content"></textarea>
+        <textarea matInput rows="6" formControlName="content" data-cy="post-create-content"></textarea>
         @if (form.controls.content.touched && form.controls.content.hasError('required')) {
           <mat-error>Le contenu est requis.</mat-error>
         }
@@ -51,6 +53,7 @@
         color="primary"
         type="submit"
         [disabled]="saving() || form.invalid"
+        data-cy="post-create-submit"
       >
         Créer
       </button>

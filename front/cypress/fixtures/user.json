@@ -1,0 +1,12 @@
+{
+  "id": 5,
+  "email": "user@test.fr",
+  "username": "user",
+  "subscriptions": [
+    {
+      "subjectId": 10,
+      "name": "Angular",
+      "description": "Tout sur Angular"
+    }
+  ]
+}
