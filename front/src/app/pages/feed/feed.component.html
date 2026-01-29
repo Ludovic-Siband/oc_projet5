@@ -29,7 +29,7 @@
           >
             <h2 class="feed__title">{{ post.title }}</h2>
             <div class="feed__meta">
-              <span>{{ post.createdAt | date: 'dd/MM/yyyy' }}</span>
+              <span>{{ post.createdAt | date: 'dd/MM/yyyy HH:mm' }}</span>
               <span>{{ post.author }}</span>
             </div>
             <p class="feed__content">{{ post.content }}</p>
