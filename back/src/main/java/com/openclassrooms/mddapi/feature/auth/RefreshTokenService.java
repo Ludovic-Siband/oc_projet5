@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 
 import com.openclassrooms.mddapi.config.AuthProperties;
 
+/**
+ * Generates and hashes refresh tokens and computes their expiration.
+ */
 @Service
 public class RefreshTokenService {
 

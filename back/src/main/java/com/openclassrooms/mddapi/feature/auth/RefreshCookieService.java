@@ -9,6 +9,9 @@ import com.openclassrooms.mddapi.config.AuthProperties;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Builds refresh-token cookies with the configured security attributes.
+ */
 @Service
 @RequiredArgsConstructor
 public class RefreshCookieService {

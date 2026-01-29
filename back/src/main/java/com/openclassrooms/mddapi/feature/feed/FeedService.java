@@ -15,6 +15,9 @@ import com.openclassrooms.mddapi.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Handles feed retrieval and sorting for subscribed subjects.
+ */
 @Service
 @RequiredArgsConstructor
 public class FeedService {
@@ -23,6 +26,14 @@ public class FeedService {
 	private final PostRepository postRepository;
 	private final UserRepository userRepository;
 
+	/**
+	 * Returns the feed for a user, filtered by their subject subscriptions and sorted by creation date.
+	 *
+	 * @param userId the authenticated user id
+	 * @param sort   sort order (ascending or descending)
+	 * @return a list of feed items
+	 * @throws NotFoundException if the user does not exist
+	 */
 	@Transactional(readOnly = true)
 	public List<FeedPostResponse> getFeed(long userId, FeedSort sort) {
 		if (!userRepository.existsById(userId)) {

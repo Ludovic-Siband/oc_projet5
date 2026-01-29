@@ -23,6 +23,9 @@ import com.openclassrooms.mddapi.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Handles post creation and comment management.
+ */
 @Service
 @RequiredArgsConstructor
 public class PostService {
@@ -32,6 +35,14 @@ public class PostService {
 	private final UserRepository userRepository;
 	private final CommentRepository commentRepository;
 
+	/**
+	 * Creates a new post for the given subject and author: both must exist.
+	 *
+	 * @param userId  the authenticated user id
+	 * @param request post creation payload
+	 * @return the created post id
+	 * @throws NotFoundException if the subject or user does not exist
+	 */
 	@Transactional
 	public CreatePostResponse createPost(long userId, CreatePostRequest request) {
 		Subject subject = subjectRepository.findById(request.subjectId())
@@ -43,6 +54,13 @@ public class PostService {
 		return new CreatePostResponse(saved.getId());
 	}
 
+	/**
+	 * Loads a post with its author, subject, and comments.
+	 *
+	 * @param postId the post id
+	 * @return post details including comments
+	 * @throws NotFoundException if the post does not exist
+	 */
 	@Transactional(readOnly = true)
 	public PostDetailResponse getPost(long postId) {
 		Post post = postRepository.findByIdWithAuthorAndSubject(postId)
@@ -66,6 +84,14 @@ public class PostService {
 				comments);
 	}
 
+	/**
+	 * Adds a comment to a post by a given user.
+	 *
+	 * @param userId  the authenticated user id
+	 * @param postId  the post id
+	 * @param request comment payload
+	 * @throws NotFoundException if the post or user does not exist
+	 */
 	@Transactional
 	public void addComment(long userId, long postId, CreateCommentRequest request) {
 		Post post = postRepository.findById(postId)

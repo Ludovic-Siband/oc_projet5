@@ -22,6 +22,9 @@ import com.openclassrooms.mddapi.security.JwtService;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Handles authentication workflows (register, login, refresh, logout).
+ */
 @Service
 @RequiredArgsConstructor
 public class AuthService {

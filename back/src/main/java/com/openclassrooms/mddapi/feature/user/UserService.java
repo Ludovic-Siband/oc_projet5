@@ -19,6 +19,9 @@ import com.openclassrooms.mddapi.feature.user.dto.UserProfileResponse;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Provides user profile read/update operations.
+ */
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -28,6 +31,13 @@ public class UserService {
 	private final PasswordEncoder passwordEncoder;
 
 	@Transactional(readOnly = true)
+	/**
+	 * Loads the user profile and subscriptions.
+	 *
+	 * @param userId the authenticated user id
+	 * @return profile with subscriptions
+	 * @throws NotFoundException if the user does not exist
+	 */
 	public UserProfileResponse getProfile(long userId) {
 		User user = userRepository.findById(userId)
 				.orElseThrow(() -> new NotFoundException("Utilisateur introuvable"));
@@ -44,6 +54,15 @@ public class UserService {
 	}
 
 	@Transactional
+	/**
+	 * Updates the user's profile fields when provided.
+	 *
+	 * @param userId  the authenticated user id
+	 * @param request profile update payload
+	 * @return updated user data
+	 * @throws NotFoundException if the user does not exist
+	 * @throws ConflictException if email or username is already used
+	 */
 	public UserDto updateProfile(long userId, UpdateUserRequest request) {
 		User user = userRepository.findById(userId)
 				.orElseThrow(() -> new NotFoundException("Utilisateur introuvable"));

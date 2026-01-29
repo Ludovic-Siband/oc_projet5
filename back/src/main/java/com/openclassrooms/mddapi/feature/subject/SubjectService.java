@@ -20,6 +20,9 @@ import com.openclassrooms.mddapi.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Manages subjects and user subscriptions.
+ */
 @Service
 @RequiredArgsConstructor
 public class SubjectService {
@@ -28,6 +31,12 @@ public class SubjectService {
 	private final SubscriptionRepository subscriptionRepository;
 	private final UserRepository userRepository;
 
+	/**
+	 * Lists all subjects with a subscription flag for the given user.
+	 *
+	 * @param userId the authenticated user id
+	 * @return subjects with subscription status
+	 */
 	@Transactional(readOnly = true)
 	public List<SubjectResponse> listSubjects(long userId) {
 		List<Long> subscribedSubjectIds = subscriptionRepository.findSubjectIdsByUserId(userId);
@@ -41,6 +50,14 @@ public class SubjectService {
 				.toList();
 	}
 
+	/**
+	 * Subscribes the user to a subject if not already subscribed.
+	 *
+	 * @param userId    the authenticated user id
+	 * @param subjectId the subject id
+	 * @return subscription status response
+	 * @throws NotFoundException if the user or subject does not exist
+	 */
 	@Transactional
 	public SubscriptionStatusResponse subscribe(long userId, long subjectId) {
 		User user = getUser(userId);
@@ -55,6 +72,14 @@ public class SubjectService {
 		return new SubscriptionStatusResponse(true);
 	}
 
+	/**
+	 * Unsubscribes the user from a subject if currently subscribed.
+	 *
+	 * @param userId    the authenticated user id
+	 * @param subjectId the subject id
+	 * @return subscription status response
+	 * @throws NotFoundException if the user or subject does not exist
+	 */
 	@Transactional
 	public SubscriptionStatusResponse unsubscribe(long userId, long subjectId) {
 		User user = getUser(userId);
@@ -69,6 +94,13 @@ public class SubjectService {
 		return new SubscriptionStatusResponse(false);
 	}
 
+	/**
+	 * Loads a user by id.
+	 *
+	 * @param userId the user id
+	 * @return the user
+	 * @throws NotFoundException if the user does not exist
+	 */
 	private User getUser(long userId) {
 		return userRepository.findById(userId)
 				.orElseThrow(() -> new NotFoundException("Utilisateur introuvable"));

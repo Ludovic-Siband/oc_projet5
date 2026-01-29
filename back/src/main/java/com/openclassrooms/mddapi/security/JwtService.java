@@ -13,6 +13,9 @@ import com.openclassrooms.mddapi.config.AuthProperties;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Issues signed JWT access tokens for authenticated users.
+ */
 @Service
 @RequiredArgsConstructor
 public class JwtService {
